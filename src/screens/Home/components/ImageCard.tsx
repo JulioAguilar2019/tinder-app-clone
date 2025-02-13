@@ -1,4 +1,5 @@
 import { Image } from 'expo-image'
+import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 
@@ -19,6 +20,12 @@ export const ImageCard = ({ user }: ImageCard) => {
     return (
         <View style={styles.card}>
             <Image style={[StyleSheet.absoluteFillObject, styles.image]} source={user.image} />
+
+            <LinearGradient
+                colors={['transparent', 'rgba(0,0,0,0.8)']}
+                style={[StyleSheet.absoluteFillObject, styles.overlay]}
+            />
+
             <View style={styles.footer}>
                 <Text style={styles.name}>{user.name}, {user.age}</Text>
                 <Text style={styles.country}>{user.city}, {user.country}</Text>
@@ -40,6 +47,11 @@ const styles = StyleSheet.create({
     },
     footer: {
         padding: 30
+    },
+    overlay: {
+        top: '50%',
+        borderBottomLeftRadius: 60,
+        borderBottomRightRadius: 60
     },
     name: {
         fontSize: 20,
