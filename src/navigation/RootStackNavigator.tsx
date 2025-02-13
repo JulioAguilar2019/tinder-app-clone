@@ -1,14 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from '../screens/Home';
+import React from 'react';
+import { MyDrawer } from './DrawerNavigator';
+import { RootStackParamList } from './navigation.types';
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
     return (
-        <Stack.Navigator
-            screenOptions={{ headerShown: false, gestureEnabled: true }}
-        >
-            <Stack.Screen name="Home" component={HomeScreen} />
-        </Stack.Navigator>
+        <RootStack.Navigator screenOptions={{ headerShown: false }}>
+            <RootStack.Screen name="MainDrawer" component={MyDrawer} />
+        </RootStack.Navigator>
     );
 }

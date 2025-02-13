@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface LayoutProps {
@@ -10,16 +10,11 @@ export const SafeAreaLayout: FC<LayoutProps> = ({
     children,
 }) => {
     const insets = useSafeAreaInsets();
-
     return (
-        <View style={[styles.container, { paddingTop: insets.top }]}>
+        <View style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom, paddingHorizontal: 36, }}>
             {children}
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-});
+

@@ -4,11 +4,10 @@ import { RootNavigator } from './navigation/RootStackNavigator';
 
 export const Main = () => {
     return (
-        <>
-            <NavigationContainer>
-                <Suspense>
-                    <RootNavigator />
-                </Suspense>
-            </NavigationContainer>
-        </>)
-}
+        <NavigationContainer>
+            <Suspense fallback={null}>
+                <RootNavigator />
+            </Suspense>
+        </NavigationContainer>
+    );
+};

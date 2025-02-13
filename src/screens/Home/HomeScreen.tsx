@@ -1,7 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaLayout } from '../../components/SafeAreaLayout';
 import { ShapesBackground } from '../../components/ShapesBackground';
+import { HomeLayout } from './components/HomeLayout';
+import { ImageCard } from './components/ImageCard';
+
+const userData = {
+    id: 1,
+    image: require('../../assets/first-girl.png'),
+    name: 'Sandra Gómez',
+    age: 22,
+    country: 'Perú',
+    city: 'Surco',
+}
 
 export const HomeScreen = () => {
     return (
@@ -9,9 +20,9 @@ export const HomeScreen = () => {
             backgroundColor='#9186e0'
         >
             <SafeAreaLayout>
-                <View>
-                    <Text style={styles.text}>Contenido sobre el fondo</Text>
-                </View>
+                <HomeLayout>
+                    <ImageCard user={userData} />
+                </HomeLayout>
             </SafeAreaLayout>
         </ShapesBackground>
     );
