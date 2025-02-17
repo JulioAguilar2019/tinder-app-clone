@@ -8,6 +8,9 @@ export type DrawerParamList = {
 
 export type RootStackParamList = {
   MainDrawer: NavigatorScreenParams<DrawerParamList>;
+  Dates: undefined;
+  Relationship: undefined;
+  Friendship: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
