@@ -5,6 +5,7 @@ import { DatesScreen } from '../screens/Home/DatesScreen';
 import { RelationshipScreen } from '../screens/Home/RelationshipScreen';
 import { MyDrawer } from './DrawerNavigator';
 import { RootStackParamList } from './navigation.types';
+import { InformationScreen } from '../screens/Home/InformationScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -29,6 +30,12 @@ export function RootNavigator() {
                     animation: 'fade',
                 }}
                 name="Relationship" component={RelationshipScreen} />
+
+            <RootStack.Screen
+                name="Information"
+                component={InformationScreen}
+                options={{ animation: 'slide_from_bottom' }}
+            />
 
         </RootStack.Navigator>
     );

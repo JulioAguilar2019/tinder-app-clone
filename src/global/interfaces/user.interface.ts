@@ -7,4 +7,5 @@ export interface IUser {
   city: string;
   country: string;
   image: ImageSourcePropType;
+  interests: string[];
 }
