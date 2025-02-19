@@ -50,14 +50,11 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#232323",
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/splash.png",
           "imageWidth": 400
         }
       ]
     ],
-    "owner": "dev.julioaguilar",
-    "updates": {
-      "url": "https://u.expo.dev/0eca238f-5cf1-4fc8-ab9c-3adf60d17afe"
-    }
+    "owner": "dev.julioaguilar"
   }
 }
