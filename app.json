@@ -9,9 +9,8 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash.png",
+      "resizeMode": "contain"
     },
     "ios": {
       "supportsTablet": true,
@@ -19,14 +18,23 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
-      "appleTeamId": "ZF9X88JD7R"
+      "appleTeamId": "ZF9X88JD7R",
+      "icon": {
+        "dark": "./assets/Dark.png",
+        "tinted": "./assets/Tinted.png",
+        "light": "./assets/Light.png"
+      },
+      "runtimeVersion": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.tinderapp"
+      "package": "com.tinderapp",
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -37,6 +45,19 @@
         "projectId": "0eca238f-5cf1-4fc8-ab9c-3adf60d17afe"
       }
     },
-    "owner": "dev.julioaguilar"
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 400
+        }
+      ]
+    ],
+    "owner": "dev.julioaguilar",
+    "updates": {
+      "url": "https://u.expo.dev/0eca238f-5cf1-4fc8-ab9c-3adf60d17afe"
+    }
   }
 }
