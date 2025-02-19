@@ -5,7 +5,7 @@ import { DrawerNavigationProp, useDrawerStatus } from '@react-navigation/drawer'
 import { SafeAreaLayout } from '../../../components/SafeAreaLayout';
 import { IUser } from '../../../global/interfaces/user.interface';
 import { DrawerParamList } from '../../../navigation/navigation.types';
-import { CardProvider } from '../../hooks/CardContext';
+import { CardProvider } from '../../context/CardContext';
 import { ImageCard } from './ImageCard';
 import Animated, {
     useSharedValue,

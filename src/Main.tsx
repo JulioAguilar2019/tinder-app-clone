@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { Suspense } from 'react';
 import { RootNavigator } from './navigation/RootStackNavigator';
-import { CardProvider } from './screens/hooks/CardContext';
+import { CardProvider } from './screens/context/CardContext';
 
 export const Main = () => {
     return (

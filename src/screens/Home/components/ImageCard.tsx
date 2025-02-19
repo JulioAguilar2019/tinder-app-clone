@@ -21,7 +21,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { IUser } from '../../../global/interfaces/user.interface';
 import { RootStackParamList } from '../../../navigation/navigation.types';
-import { useCardContext } from '../../hooks/CardContext';
+import { useCardContext } from '../../context/CardContext';
 import { FooterCard } from './FooterButtons';
 
 export const CardWith = Dimensions.get('window').width * 0.85;
