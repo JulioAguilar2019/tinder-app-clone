@@ -1,3 +1,6 @@
+import { NavigationProp, useNavigation, useRoute } from '@react-navigation/native';
+import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
     Dimensions,
@@ -6,23 +9,20 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { Image } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
     Extrapolation,
     interpolate,
+    runOnJS,
     useAnimatedStyle,
     useSharedValue,
     withSpring,
-    withTiming,
-    runOnJS
+    withTiming
 } from 'react-native-reanimated';
-import { NavigationProp, useNavigation, useRoute } from '@react-navigation/native';
 import { IUser } from '../../../global/interfaces/user.interface';
 import { RootStackParamList } from '../../../navigation/navigation.types';
-import { FooterCard } from './FooterButtons';
 import { useCardContext } from '../../hooks/CardContext';
+import { FooterCard } from './FooterButtons';
 
 export const CardWith = Dimensions.get('window').width * 0.85;
 const screenWidth = Dimensions.get('window').width;
@@ -147,9 +147,9 @@ export const ImageCard = ({ user, numOfCards, index }: ImageCardProps) => {
         navigation.navigate('Information', { user });
     };
 
-    const handleDates = () => navigation.navigate('Dates');
-    const handleFriendship = () => navigation.navigate('Friendship');
-    const handleRelationship = () => navigation.navigate('Relationship');
+    const handleDates = () => navigation.navigate('MainDrawer', { screen: 'Dates' });
+    const handleFriendship = () => navigation.navigate('MainDrawer', { screen: 'Friendship' });
+    const handleRelationship = () => navigation.navigate('MainDrawer', { screen: 'Relationship' });
 
     const localHandleNo = () => {
         translationX.value = withTiming(-500, { duration: 500 }, () => {
@@ -162,7 +162,6 @@ export const ImageCard = ({ user, numOfCards, index }: ImageCardProps) => {
             runOnJS(incrementIndex)();
         });
     };
-
     const localHandleSuperLike = () => {
         superLike.value = withTiming(1, { duration: 300 }, () => {
             translationX.value = withTiming(500, { duration: 500 }, () => {

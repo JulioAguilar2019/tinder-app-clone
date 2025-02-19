@@ -1,8 +1,14 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image } from 'expo-image';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withTiming,
+    interpolate,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../navigation/navigation.types';
 import { Badges } from './components/Badges';
@@ -12,36 +18,60 @@ type InformationScreenProps = NativeStackScreenProps<RootStackParamList, 'Inform
 
 export const InformationScreen = () => {
     const insets = useSafeAreaInsets();
-    const navigation = useNavigation<InformationScreenProps['navigation']>();
-
+    const navigation = useNavigation();
     const { params } = useRoute<InformationScreenProps['route']>();
     const { user } = params;
 
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
-    const handleNo = () => console.log('test')
-    const handleYes = () => console.log('test')
-    const handleSuperLike = () => console.log('test')
+    const animationValue = useSharedValue(0);
 
-    const handleClose = () => {
-        navigation.goBack()
-    };
-    const handleMenu = () => {
+    const collapsedOffset = 250;
+
+    const handleGoBack = () => {
+        navigation.goBack();
     };
 
-    const handleFloatingButton = () => {
+    const handleToggleInfo = () => {
+        setIsCollapsed(!isCollapsed);
+        animationValue.value = withTiming(isCollapsed ? 0 : 1, { duration: 300 });
     };
+
+    const animatedWhiteContainerStyle = useAnimatedStyle(() => {
+        const translateY = interpolate(animationValue.value, [0, 1], [0, collapsedOffset]);
+        return {
+            transform: [{ translateY }],
+        };
+    });
+
+    const animatedFloatingButtonStyle = useAnimatedStyle(() => {
+        const translateY = interpolate(animationValue.value, [0, 1], [0, collapsedOffset]);
+        return {
+            transform: [{ translateY }],
+        };
+    });
+
+    const animatedCarouselStyle = useAnimatedStyle(() => {
+        const translateY = interpolate(animationValue.value, [0, 1], [0, collapsedOffset]);
+        return {
+            transform: [{ translateY }],
+        };
+    });
+
+    const floatingIconSource = isCollapsed
+        ? require('../../assets/arrow-up-icon.png')
+        : require('../../assets/arrow-down-icon.png');
 
     return (
         <View style={styles.root}>
             <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
-                <TouchableOpacity onPress={handleClose} style={styles.headerButton}>
+                <TouchableOpacity onPress={handleGoBack} style={styles.headerButton}>
                     <Image
                         source={require('../../assets/x-icon-black.png')}
                         style={styles.headerIcon}
                     />
                 </TouchableOpacity>
-
-                <TouchableOpacity onPress={handleMenu} style={styles.headerButton}>
+                <TouchableOpacity onPress={() => { }} style={styles.headerButton}>
                     <Image
                         source={require('../../assets/dots-icon.png')}
                         style={styles.headerIcon}
@@ -52,34 +82,54 @@ export const InformationScreen = () => {
             <View style={styles.topImageContainer}>
                 <Image
                     source={user.image}
-                    style={[styles.userImage, StyleSheet.absoluteFillObject]}
+                    style={styles.userImage}
                 />
+
+                <Animated.View style={[styles.carouselContainer, animatedCarouselStyle]}>
+                    <View style={[styles.dot, styles.activeDot]} />
+                    <View style={styles.dot} />
+                    <View style={styles.dot} />
+                </Animated.View>
             </View>
 
-            <View style={[styles.whiteContainer, { paddingBottom: insets.bottom }]}>
-                <TouchableOpacity style={styles.floatingButton} onPress={handleFloatingButton}>
+            <Animated.View style={[styles.floatingButton, animatedFloatingButtonStyle]}>
+                <TouchableOpacity onPress={handleToggleInfo}>
                     <Image
-                        source={require('../../assets/heart-icon.png')}
+                        source={floatingIconSource}
                         style={styles.floatingIcon}
                     />
                 </TouchableOpacity>
+            </Animated.View>
 
+            <Animated.View
+                style={[
+                    styles.whiteContainer,
+                    { paddingBottom: insets.bottom },
+                    animatedWhiteContainerStyle,
+                ]}
+            >
                 <View style={styles.whiteContentContainer}>
                     <View style={styles.infoSection}>
                         <Text style={styles.title}>{user.name}, {user.age}</Text>
                         <Text style={styles.subtitle}>{user.city}, {user.country}</Text>
 
-                        <Text style={styles.sectionTitle}>Intereses</Text>
-                        <Badges items={user.interests} badgeColor="#f3b8d9" />
+                        {!isCollapsed && (
+                            <>
+                                <Text style={styles.sectionTitle}>Intereses</Text>
+                                <Badges items={user.interests} color1="#7086E3" color2="#9072E5" />
+                            </>
+                        )}
                     </View>
 
-                    <FooterCard
-                        onNo={handleNo}
-                        onSuperLike={handleSuperLike}
-                        onYes={handleYes}
-                    />
+                    {!isCollapsed && (
+                        <FooterCard
+                            onNo={handleGoBack}
+                            onSuperLike={handleGoBack}
+                            onYes={handleGoBack}
+                        />
+                    )}
                 </View>
-            </View>
+            </Animated.View>
         </View>
     );
 };
@@ -87,7 +137,7 @@ export const InformationScreen = () => {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
     },
     header: {
         position: 'absolute',
@@ -95,35 +145,45 @@ const styles = StyleSheet.create({
         zIndex: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
     headerButton: {
-        padding: 8
+        padding: 8,
     },
     headerIcon: {
         width: 32,
         height: 32,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
     },
     topImageContainer: {
-        flex: 0.45
+        flex: 1,
+        position: 'relative',
     },
     userImage: {
         width: '100%',
-        height: '150%',
-        resizeMode: 'cover'
+        height: '160%',
+        resizeMode: 'cover',
     },
-
-    whiteContainer: {
-        flex: 0.55,
+    // Puntos del carrusel
+    carouselContainer: {
+        position: 'absolute',
+        bottom: 50,
+        alignSelf: 'center',
+        flexDirection: 'row',
+    },
+    dot: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: '#ddd',
+        marginHorizontal: 4,
+    },
+    activeDot: {
         backgroundColor: '#fff',
-        borderTopLeftRadius: 60,
-        overflow: 'hidden',
     },
-
     floatingButton: {
         position: 'absolute',
-        top: 20,
+        top: '42%',
         right: 20,
         width: 50,
         height: 50,
@@ -131,39 +191,49 @@ const styles = StyleSheet.create({
         backgroundColor: '#ed7488',
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: 2,
+        zIndex: 999,
         elevation: 4,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
-        shadowRadius: 4
+        shadowRadius: 4,
     },
     floatingIcon: {
         width: 24,
         height: 24,
         tintColor: '#fff',
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+    },
+    whiteContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 60,
+        marginTop: -30,
+        zIndex: 1,
+        padding: 30,
     },
     whiteContentContainer: {
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     infoSection: {
         paddingHorizontal: 20,
-        paddingTop: 60
+        paddingTop: 20,
     },
     title: {
-        fontSize: 24,
-        fontWeight: 'bold'
+        fontSize: 28,
+        fontWeight: 'bold',
     },
     subtitle: {
-        fontSize: 18,
+        fontSize: 20,
         marginTop: 4,
-        marginBottom: 16
+        marginBottom: 16,
+        color: '#666',
     },
     sectionTitle: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: '600',
-        marginBottom: 8
-    }
+        marginBottom: 20,
+        marginTop: 10,
+    },
 });

@@ -1,17 +1,16 @@
-import { NavigatorScreenParams } from '@react-navigation/native';
 import { DrawerScreenProps } from '@react-navigation/drawer';
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { IUser } from '../global/interfaces/user.interface';
 
 export type DrawerParamList = {
-  Home: undefined;
+  Friendship: undefined;
+  Dates: undefined;
+  Relationship: undefined;
 };
 
 export type RootStackParamList = {
   MainDrawer: NavigatorScreenParams<DrawerParamList>;
-  Dates: undefined;
-  Friendship: undefined;
-  Relationship: undefined;
   Information: { user: IUser };
 };
 

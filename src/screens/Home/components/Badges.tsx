@@ -1,25 +1,28 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface BadgesProps {
-    items: string[]
-    badgeColor?: string
+    items: string[];
+    color1: string;
+    color2: string;
 }
 
-export const Badges: React.FC<BadgesProps> = ({ items, badgeColor = '#EDEDED' }) => {
+export const Badges: React.FC<BadgesProps> = ({ items, color1, color2 }) => {
     return (
         <View style={styles.container}>
             {items.map((item, index) => (
-                <View
+                <LinearGradient
                     key={index}
-                    style={[styles.badge, { backgroundColor: badgeColor }]}
+                    colors={[color1, color2]}
+                    style={styles.badge}
                 >
                     <Text style={styles.badgeText}>{item}</Text>
-                </View>
+                </LinearGradient>
             ))}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -27,14 +30,15 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     badge: {
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        borderRadius: 20,
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderRadius: 25,
         marginRight: 8,
         marginBottom: 8,
     },
     badgeText: {
-        color: '#000',
-        fontSize: 14,
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold'
     },
-})
+});

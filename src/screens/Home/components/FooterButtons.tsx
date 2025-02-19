@@ -26,7 +26,7 @@ export const FooterCard: React.FC<FooterCardProps> = ({
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={[styles.button, { backgroundColor: '#ffffff' }]}
+                style={[styles.button, styles.centerButton, { backgroundColor: '#ffffff' }]}
                 onPress={onSuperLike}
             >
                 <Image
@@ -60,6 +60,17 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         justifyContent: 'center',
         alignItems: 'center',
+
+    },
+    centerButton: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
     },
     icon: {
         width: 24,
