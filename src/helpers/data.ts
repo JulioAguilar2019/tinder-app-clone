@@ -7,6 +7,7 @@ export const userDataFriendship = [
     country: 'Perú',
     city: 'Surco',
     interests: ['Viajar', 'Leer', 'Amistad', 'Salir de fiesta', 'Pasarlo bien'],
+    genderIdentity: '',
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const userDataFriendship = [
     country: 'Perú',
     city: 'Lima',
     interests: ['Viajar', 'Leer', 'Salir de fiesta'],
+    genderIdentity: ['Femme'],
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const userDataFriendship = [
     country: 'Perú',
     city: 'San Isidro',
     interests: ['Viajar', 'Leer', 'Pasarlo bien'],
+    genderIdentity: ['Femme'],
   },
 ];
 
@@ -37,6 +40,7 @@ export const userDataDates = [
     country: 'Perú',
     city: 'Lima',
     interests: ['Viajar', 'Leer', 'Salir de fiesta'],
+    genderIdentity: ['Femme'],
   },
   {
     id: 2,
@@ -46,6 +50,7 @@ export const userDataDates = [
     country: 'Perú',
     city: 'San Isidro',
     interests: ['Viajar', 'Leer', 'Pasarlo bien'],
+    genderIdentity: ['Femme'],
   },
   {
     id: 3,
@@ -55,6 +60,7 @@ export const userDataDates = [
     country: 'Perú',
     city: 'Surco',
     interests: ['Viajar', 'Leer', 'Amistad', 'Salir de fiesta', 'Pasarlo bien'],
+    genderIdentity: '',
   },
 ];
 
@@ -67,8 +73,8 @@ export const userDataRelationship = [
     country: 'Perú',
     city: 'San Isidro',
     interests: ['Viajar', 'Leer', 'Pasarlo bien'],
+    genderIdentity: ['Femme'],
   },
-
   {
     id: 2,
     image: require('../assets/first-girl.png'),
@@ -77,8 +83,8 @@ export const userDataRelationship = [
     country: 'Perú',
     city: 'Surco',
     interests: ['Viajar', 'Leer', 'Amistad', 'Salir de fiesta', 'Pasarlo bien'],
+    genderIdentity: '',
   },
-
   {
     id: 3,
     image: require('../assets/second-girl.png'),
@@ -87,5 +93,6 @@ export const userDataRelationship = [
     country: 'Perú',
     city: 'Lima',
     interests: ['Viajar', 'Leer', 'Salir de fiesta'],
+    meConsidero: ['Femme'],
   },
 ];

@@ -11,7 +11,7 @@ export type DrawerParamList = {
 
 export type RootStackParamList = {
   MainDrawer: NavigatorScreenParams<DrawerParamList>;
-  Information: { user: IUser };
+  Information: { user: IUser; source: string };
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

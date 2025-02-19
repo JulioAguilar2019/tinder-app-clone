@@ -1,17 +1,17 @@
-import React from 'react';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import {
+    DrawerContentComponentProps,
     DrawerContentScrollView,
     DrawerItem,
-    DrawerContentComponentProps,
 } from '@react-navigation/drawer';
+import React from 'react';
 import {
-    View,
-    Text,
     Image,
     StyleSheet,
+    Text,
     TouchableOpacity,
+    View,
 } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function CustomDrawerContent(props: DrawerContentComponentProps) {
@@ -34,7 +34,7 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
 
             <View style={styles.header}>
                 <Image
-                    source={require('../assets/first-girl.png')}
+                    source={require('../assets/profile-picture.png')}
                     style={styles.profileImage}
                 />
                 <Text style={styles.name}>Andrea, 20</Text>
@@ -44,49 +44,86 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
             <View style={styles.menuContainer}>
                 <DrawerItem
                     label="Lecafé"
-                    onPress={() => console.log('Lecafé')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    onPress={() => { }}
+                    icon={() => (
+                        <Image
+                            source={require('../assets/lecafe-icon.png')}
+                            style={{
+                                width: 24,
+                                height: 24,
+                                resizeMode: 'contain',
+                            }}
+                        />
                     )}
                     labelStyle={styles.drawerItemLabel}
                 />
+
                 <DrawerItem
                     label="Mensajes"
                     onPress={() => console.log('Mensajes')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    icon={() => (
+                        <Ionicons
+                            name="chatbubbles-outline"
+                            size={24}
+                            color="#fff"
+                            style={{ width: 24, height: 24 }}
+                        />
                     )}
                     labelStyle={styles.drawerItemLabel}
                 />
+
                 <DrawerItem
                     label="Matches"
                     onPress={() => console.log('Matches')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    icon={() => (
+                        <Ionicons
+                            name="heart-outline"
+                            size={24}
+                            color="#fff"
+                            style={{ width: 24, height: 24 }}
+                        />
                     )}
                     labelStyle={styles.drawerItemLabel}
                 />
+
                 <DrawerItem
                     label="Mi Perfil"
                     onPress={() => console.log('Mi Perfil')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    icon={() => (
+                        <Ionicons
+                            name="person-outline"
+                            size={24}
+                            color="#fff"
+                            style={{ width: 24, height: 24 }}
+                        />
                     )}
                     labelStyle={styles.drawerItemLabel}
                 />
+
                 <DrawerItem
                     label="Tutorial"
                     onPress={() => console.log('Tutorial')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    icon={() => (
+                        <Ionicons
+                            name="book-outline"
+                            size={24}
+                            color="#fff"
+                            style={{ width: 24, height: 24 }}
+                        />
                     )}
                     labelStyle={styles.drawerItemLabel}
                 />
+
                 <DrawerItem
                     label="Ajustes"
                     onPress={() => console.log('Ajustes')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    icon={() => (
+                        <Ionicons
+                            name="settings-outline"
+                            size={24}
+                            color="#fff"
+                            style={{ width: 24, height: 24 }}
+                        />
                     )}
                     labelStyle={styles.drawerItemLabel}
                 />
@@ -96,8 +133,13 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
                 <DrawerItem
                     label="Cerrar sesión"
                     onPress={() => console.log('Cerrar sesión')}
-                    icon={({ size }) => (
-                        <Ionicons name="log-out-outline" size={size} color="#fff" />
+                    icon={() => (
+                        <Ionicons
+                            name="log-out-outline"
+                            size={24}
+                            color="#fff"
+                            style={{ width: 24, height: 24 }}
+                        />
                     )}
                     labelStyle={[styles.drawerItemLabel, { fontWeight: 'bold' }]}
                 />
@@ -109,7 +151,7 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F4AECF',
+        backgroundColor: '#FFB1C7',
     },
     closeIconContainer: {
         position: 'absolute',
@@ -121,9 +163,9 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
     },
     profileImage: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        width: 100,
+        height: 100,
+        borderRadius: 60,
         marginBottom: 10,
     },
     name: {
@@ -134,6 +176,7 @@ const styles = StyleSheet.create({
     location: {
         fontSize: 14,
         color: '#fff',
+        fontWeight: 'bold',
     },
     menuContainer: {
         marginTop: 20,

@@ -144,7 +144,7 @@ export const ImageCard = ({ user, numOfCards, index }: ImageCardProps) => {
         });
 
     const handleInformation = () => {
-        navigation.navigate('Information', { user });
+        navigation.navigate('Information', { user, source: currentRouteName });
     };
 
     const handleDates = () => navigation.navigate('MainDrawer', { screen: 'Dates' });

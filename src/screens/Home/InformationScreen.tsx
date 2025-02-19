@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image } from 'expo-image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
     useSharedValue,
@@ -21,6 +21,7 @@ export const InformationScreen = () => {
     const navigation = useNavigation();
     const { params } = useRoute<InformationScreenProps['route']>();
     const { user } = params;
+    const { source } = params;
 
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -62,6 +63,27 @@ export const InformationScreen = () => {
         ? require('../../assets/arrow-up-icon.png')
         : require('../../assets/arrow-down-icon.png');
 
+    let primaryColor = '#000';
+    let secondaryColor = '#000';
+
+    switch (source) {
+        case 'Friendship':
+            primaryColor = '#7086E3';
+            secondaryColor = '#9072E5';
+            break;
+        case 'Dates':
+            primaryColor = '#FFB03A';
+            secondaryColor = '#FF6B86';
+            break;
+        case 'Relationship':
+            primaryColor = '#FF58A4';
+            secondaryColor = '#FF6B86';
+            break;
+        default:
+            primaryColor = '#9072E5';
+            secondaryColor = '#9072E5';
+    }
+
     return (
         <View style={styles.root}>
             <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
@@ -94,10 +116,7 @@ export const InformationScreen = () => {
 
             <Animated.View style={[styles.floatingButton, animatedFloatingButtonStyle]}>
                 <TouchableOpacity onPress={handleToggleInfo}>
-                    <Image
-                        source={floatingIconSource}
-                        style={styles.floatingIcon}
-                    />
+                    <Image source={floatingIconSource} style={styles.floatingIcon} />
                 </TouchableOpacity>
             </Animated.View>
 
@@ -116,7 +135,13 @@ export const InformationScreen = () => {
                         {!isCollapsed && (
                             <>
                                 <Text style={styles.sectionTitle}>Intereses</Text>
-                                <Badges items={user.interests} color1="#7086E3" color2="#9072E5" />
+                                <Badges items={user.interests} primaryColor={primaryColor} secondaryColor={secondaryColor} />
+                                {user.genderIdentity.length > 0 && (
+                                    <>
+                                        <Text style={styles.sectionTitle}>Me considero</Text>
+                                        <Badges items={user.genderIdentity} primaryColor={primaryColor} secondaryColor={secondaryColor} />
+                                    </>
+                                )}
                             </>
                         )}
                     </View>

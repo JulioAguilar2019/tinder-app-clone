@@ -1,21 +1,28 @@
 import React, { FC, ReactNode } from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useTheme } from '../screens/context/ThemeContext';
 
 interface ShapesBackgroundProps {
     children: ReactNode;
-    backgroundColor?: string;
 }
 
-export const ShapesBackground: FC<ShapesBackgroundProps> = ({
-    children,
-    backgroundColor = '#fff',
-}) => {
+export const ShapesBackground: FC<ShapesBackgroundProps> = ({ children }) => {
+    const { primaryColor, secondaryColor } = useTheme();
+
     return (
         <ImageBackground
             source={require('../assets/fs-background.png')}
-            style={[styles.background, { backgroundColor }]}
+            style={styles.background}
         >
-            {children}
+            <LinearGradient
+                colors={[primaryColor, secondaryColor]}
+                style={styles.gradient}
+                start={{ x: 0.5, y: 0 }}
+                end={{ x: 0.5, y: 1 }}
+            >
+                {children}
+            </LinearGradient>
         </ImageBackground>
     );
 };
@@ -23,5 +30,12 @@ export const ShapesBackground: FC<ShapesBackgroundProps> = ({
 const styles = StyleSheet.create({
     background: {
         flex: 1,
+        width: '100%',
+        height: '100%',
     },
+    gradient: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+    }
 });

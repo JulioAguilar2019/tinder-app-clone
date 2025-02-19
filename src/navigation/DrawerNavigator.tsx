@@ -16,11 +16,11 @@ export function MainDrawer(): JSX.Element {
             screenOptions={{
                 headerShown: false,
                 drawerType: 'front',
-                overlayColor: '#F4AECF',
-                sceneStyle: { backgroundColor: '#F4AECF' },
+                overlayColor: '#FFB1C7',
+                sceneStyle: { backgroundColor: '#FFB1C7' },
                 drawerStyle: {
                     width: Dimensions.get('window').width * 0.5,
-                    backgroundColor: '#F4AECF',
+                    backgroundColor: '#FFB1C7',
                 },
             }}
         >

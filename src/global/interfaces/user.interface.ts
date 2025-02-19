@@ -8,4 +8,5 @@ export interface IUser {
   country: string;
   image: ImageSourcePropType;
   interests: string[];
+  genderIdentity: string[];
 }

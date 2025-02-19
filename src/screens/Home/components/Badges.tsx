@@ -1,20 +1,21 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface BadgesProps {
     items: string[];
-    color1: string;
-    color2: string;
+    primaryColor: string;
+    secondaryColor: string;
 }
 
-export const Badges: React.FC<BadgesProps> = ({ items, color1, color2 }) => {
+export const Badges: React.FC<BadgesProps> = ({ items, primaryColor, secondaryColor }) => {
+
     return (
         <View style={styles.container}>
             {items.map((item, index) => (
                 <LinearGradient
                     key={index}
-                    colors={[color1, color2]}
+                    colors={[primaryColor, secondaryColor]}
                     style={styles.badge}
                 >
                     <Text style={styles.badgeText}>{item}</Text>
